@@ -4,6 +4,8 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 
@@ -12,7 +14,7 @@ public class Model {
     public static String smallCap = "абвгдеёжзиклмнопрстуфхцчшщъыьэя";
     public static String numbers = "123456789";
     public static String symbolsExample = ".,\"\":-!? ";
-
+    public static String myAlphabet = bigCap + smallCap + numbers + symbolsExample;
     int currentFunction;
     int key;
     String inputUser;
@@ -54,12 +56,15 @@ public class Model {
                     takeKey();
                     takeInputPath();
                     takeOutputPath();
+                    decode(inputUser,outputUser);
+                    completeMessage();
+                    showFile(outputUser);
                 } else if (currentFunction == 3) {
                     System.out.println("ТЕКУЩАЯ ОПЕРАЦИЯ: " + BRUTEFORCE);
                     takeInputPath();
                     takeOutputPath();
                     showFile(inputUser);
-                    decode(inputUser, outputUser);
+                    bruteforce(inputUser,outputUser);
                     completeMessage();
                     showFile(outputUser);
                 } else if (currentFunction == 4) {
@@ -67,9 +72,7 @@ public class Model {
                     getDefaultExample();
                 } else if (currentFunction == 5) {
                     System.out.println("ТЕКУЩАЯ ОПЕРАЦИЯ: " + ANALYSIS);
-                    takeKey();
-                    takeInputPath();
-                    takeOutputPath();
+                    System.out.println("Не готово");
                 } else {
                     System.err.println("Такой команды не существует!");
                 }
@@ -175,15 +178,19 @@ public class Model {
         String inputStr = "C:\\testSrc\\source.txt";
         String outputStr = "C:\\testSrc\\destination.txt";
         String decodeTest = "C:\\testSrc\\decode.txt";
+        String bruteforceTest = "C:\\testSrc\\bruteforceRes.txt";
         key = 1;
         System.out.println("\n");
-        System.out.println("Текущий файл:\n");
+        System.out.println("----------------------------------");
+        System.out.println("Текущий файл:");
+        System.out.println("----------------------------------");
         showFile(inputStr);
         encode(inputStr, outputStr);
         showFile(outputStr);
         decode(outputStr, decodeTest);
         showFile(decodeTest);
-
+        bruteforce(decodeTest, bruteforceTest);
+        showFile(decodeTest);
     }
 
     public void encode(String source, String destination) throws IOException {
@@ -204,10 +211,9 @@ public class Model {
     }
 
 
-
     private void showFile(String path) throws IOException {
 
-        try (FileReader reader = new FileReader(path);
+        try (FileReader reader = new FileReader(path)
         ) {
             int symbol;
             while ((symbol = reader.read()) != -1) {
@@ -218,14 +224,8 @@ public class Model {
     }
 
     private char symbolShift(char symbol, int shift) {
-        if (bigCap.indexOf(symbol) != -1) {
-            return bigCap.charAt((bigCap.indexOf(symbol) + shift) % bigCap.length());
-        } else if (smallCap.indexOf(symbol) != -1) {
-            return smallCap.charAt((smallCap.indexOf(symbol) + shift) % smallCap.length());
-        } else if (numbers.indexOf(symbol) != -1) {
-            return numbers.charAt((numbers.indexOf(symbol) + shift) % numbers.length());
-        } else if (symbolsExample.indexOf(symbol) != -1) {
-            return symbolsExample.charAt((symbolsExample.indexOf(symbol) + shift) % symbolsExample.length());
+        if (myAlphabet.indexOf(symbol) != -1) {
+            return myAlphabet.charAt((myAlphabet.indexOf(symbol) + shift) % myAlphabet.length());
         } else {
             return symbol;
         }
@@ -251,46 +251,75 @@ public class Model {
              FileWriter writer = new FileWriter(destination)
         ) {
             int symbol;
-            int shiftBig = bigCap.length() - key;
-            int shiftNum = numbers.length() - key;
-            int shiftSymbols = symbolsExample.length() - key;
-            int shiftSmall = smallCap.length() - key;
-
+            int shiftAlphabet = myAlphabet.length() - key;
 //            int shift = -key;
             while ((symbol = reader.read()) != -1) {
                 char currentSymbol = (char) symbol;
-                if (Character.isUpperCase(currentSymbol)) {
-                    currentSymbol = symbolShift(currentSymbol, shiftBig);
-                } else if (Character.isLowerCase(currentSymbol)) {
-                    currentSymbol = symbolShift(currentSymbol, shiftSmall);
-                } else if (Character.isDigit(currentSymbol)) {
-                    currentSymbol = symbolShift(currentSymbol, shiftNum);
-                }else if (isSpecialSymbol(currentSymbol,symbolsExample)){
-                    currentSymbol = symbolShift(currentSymbol, shiftSymbols);
-                }
+
+                currentSymbol = symbolShift(currentSymbol, shiftAlphabet);
+
                 writer.write(currentSymbol);
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    public static boolean isSpecialSymbol(char c, String symbolsExample) {
-        for (int i = 0; i < symbolsExample.length(); i++) {
-            if (c == symbolsExample.charAt(i)) {
-                return true;
+
+
+    public static void bruteforce(String source, String destination) throws IOException {
+        System.out.println("----------------------------------");
+        System.out.println("Bruteforce");
+        System.out.println("----------------------------------");
+        Map<Character, Integer> frequency = getFrequency(source);
+        int maxFrequency = 0;
+        char mostFrequentLetter = ' ';
+        for (Map.Entry<Character, Integer> entry : frequency.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentLetter = entry.getKey();
             }
         }
-        return false;
+        int key = myAlphabet.indexOf(mostFrequentLetter) - myAlphabet.indexOf('О');
+        if (key < 0) {
+            key += myAlphabet.length();
+        }
+        try (FileWriter writer = new FileWriter(destination)) {
+            try (FileReader reader = new FileReader(source)) {
+                int symbol;
+                while ((symbol = reader.read()) != -1) {
+                    char currentSymbol = (char) symbol;
+                    if (myAlphabet.indexOf(currentSymbol) != -1) {
+                        char decryptedSymbol = decryptSymbol(currentSymbol, key);
+                        writer.write(decryptedSymbol);
+                    } else {
+                        writer.write(currentSymbol);
+                    }
+                }
+            }
+        }
     }
-    public void hackThis(String source) {
 
-
+    private static Map<Character, Integer> getFrequency(String inputFile) throws IOException {
+        Map<Character, Integer> frequency = new HashMap<>();
+        try (FileReader reader = new FileReader(inputFile)) {
+            int symbol;
+            while ((symbol = reader.read()) != -1) {
+                char currentSymbol = (char) symbol;
+                if (myAlphabet.indexOf(currentSymbol) != -1) {
+                    frequency.put(currentSymbol, frequency.getOrDefault(currentSymbol, 0) + 1);
+                }
+            }
+        }
+        return frequency;
     }
 
-    public void splitter() {
-        System.out.println("===========================================");
-
+    private static char decryptSymbol(char symbol, int key) {
+        int index = myAlphabet.indexOf(symbol) - key;
+        if (index < 0) {
+            index += myAlphabet.length();
+        }
+        return myAlphabet.charAt(index);
     }
+
+
 }
