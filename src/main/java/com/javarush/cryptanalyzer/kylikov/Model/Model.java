@@ -244,7 +244,7 @@ public class Model {
         int temp = 0;
         for (int i = 0; i < myAlphabet.length() ; i++) {
             var map = solveFrequency(memory);
-            var count = calculateCount(map, 0.01);
+            var count = calculateCount(map, 0.25);
 //            res.put(i, count);
             if (count>= temp){
                 result = Arrays.copyOf(memory,memory.length);

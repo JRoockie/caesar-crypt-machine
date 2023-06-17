@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8f272879-9eaf-4f77-9f94-5e61652d6c50" name="Changes" comment="работает вывод по умолчанию, сломался брутфорс">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzer/kylikov/Model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzer/kylikov/Model/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/encoded.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/encoded.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/input.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/output.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +81,21 @@
       <option name="project" value="LOCAL" />
       <updated>1679458770906</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="работает вывод по умолчанию, сломался брутфорс">
+      <created>1687002504857</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1687002504857</updated>
+    </task>
+    <task id="LOCAL-00005" summary="работает вывод по умолчанию, сломался брутфорс">
+      <created>1687002675829</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1687002675829</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -99,7 +109,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzer/kylikov/Model/Model.java</url>
-          <line>253</line>
+          <line>249</line>
           <option name="timeStamp" value="49" />
         </line-breakpoint>
       </breakpoints>
