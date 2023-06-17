@@ -100,16 +100,12 @@ public class Model {
                     takeOutputPath();
                     showFile(inputUser);
 //                    bruteforce(inputUser, outputUser);
+                    ultraBruteforce(inputUser, outputUser);
                     completeMessage();
                     showFile(outputUser);
                 } else if (currentFunction == 4) {
                     System.out.println("ТЕКУЩАЯ ОПЕРАЦИЯ: " + DEFAULT);
                     getDefaultExample();
-                } else if (currentFunction == 5) {
-                    System.out.println("ТЕКУЩАЯ ОПЕРАЦИЯ: " + ANALYSIS);
-                    System.out.println("Не готово");
-                } else if (currentFunction == 666) {
-                    ultraBruteforce(inputUser, outputUser);
                 } else {
                     System.err.println("Такой команды не существует!");
                 }
