@@ -8,8 +8,8 @@ import java.util.*;
 
 
 public class Model {
-    public static String bigCap = "АБВГДЕЁЖЗИКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
-    public static String smallCap = "абвгдеёжзиклмнопрстуфхцчшщъыьэя";
+    public static String bigCap = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+    public static String smallCap = "абвгдеёжзийклмнопрстуфхцчшщъыьэя";
     public static String numbers = "123456789";
     public static String symbolsExample = ".,\":-!? ";
     public static String myAlphabet = bigCap + smallCap + numbers + symbolsExample;
@@ -231,11 +231,15 @@ public class Model {
         decode(encodedStr, outputStr);
         showFile(outputStr);
         ultraBruteforce(encodedStr, outputStr);
+        showFile(outputStr);
 //      bruteforce(encodedStr, outputStr);
 //      showFile(outputStr);
     }
 
     private void ultraBruteforce(String encodedStr, String outputStr) throws IOException {
+        System.out.println("----------------------------------");
+        System.out.println("Bruteforce");
+        System.out.println("----------------------------------");
 
 //        Map<Integer, Integer> res = new HashMap<>();
         char[] memory = fileToMemory(encodedStr);

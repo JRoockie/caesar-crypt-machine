@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8f272879-9eaf-4f77-9f94-5e61652d6c50" name="Changes" comment="работает вывод по умолчанию, сломался брутфорс">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzer/kylikov/Model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javarush/cryptanalyzer/kylikov/Model/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/output.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/output.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +97,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687002675829</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="работает вывод по умолчанию, сломался брутфорс">
+      <created>1687002930318</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1687002930318</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
